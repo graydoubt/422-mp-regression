@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwm6e3gxpm5mt"]
+
+[ext_resource type="Script" path="res://scoped_object.gd" id="1_4b043"]
+
+[node name="GGNetworkScopedObject2D" type="Area2D"]
+monitoring = false
+monitorable = false
+script = ExtResource("1_4b043")

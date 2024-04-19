@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bc2fiwnsgya4s"]
+
+[ext_resource type="Script" path="res://client_scope.gd" id="1_4vuxp"]
+
+[node name="GGNetworkClientScope2D" type="Area2D"]
+script = ExtResource("1_4vuxp")

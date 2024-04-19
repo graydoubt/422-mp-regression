@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcrtxxlaqnmo4"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_h4dep"]
+[ext_resource type="PackedScene" uid="uid://igog4d2hm7su" path="res://tile_map.tscn" id="2_h4of2"]
+
+[node name="Main" type="Node2D" node_paths=PackedStringArray("main_menu", "host_button", "join_button", "tilemap")]
+script = ExtResource("1_h4dep")
+main_menu = NodePath("MainMenu")
+host_button = NodePath("MainMenu/CenterContainer/VBoxContainer/HostButton")
+join_button = NodePath("MainMenu/CenterContainer/VBoxContainer/JoinButton")
+tilemap = NodePath("TileMap")
+
+[node name="MainMenu" type="CanvasLayer" parent="."]
+
+[node name="CenterContainer" type="CenterContainer" parent="MainMenu"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/CenterContainer"]
+layout_mode = 2
+
+[node name="HostButton" type="Button" parent="MainMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Host"
+
+[node name="JoinButton" type="Button" parent="MainMenu/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Join"
+
+[node name="TileMap" parent="." instance=ExtResource("2_h4of2")]
+trust_clients = false

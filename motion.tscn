@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://baqdmodjcnlxl"]
+
+[ext_resource type="Script" path="res://motion.gd" id="1_kl1gi"]
+
+[node name="Motion" type="MultiplayerSynchronizer"]
+root_path = NodePath(".")
+public_visibility = false
+script = ExtResource("1_kl1gi")
