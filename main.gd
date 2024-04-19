@@ -46,7 +46,6 @@ func _on_join_button_pressed() -> void:
 	main_menu.hide()
 	tilemap.show()
 
-
 #endregion
 
 #region Network

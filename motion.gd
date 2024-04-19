@@ -1,11 +1,7 @@
 extends MultiplayerSynchronizer
 
 ## This synchronizer is solely responsible for sending the character movement
-## to the server (or the client).
-##
-## The direction depends on the [member DemoMPCharacter.authority_id],
-## which is set according to the TileMap's trust_client setting when
-## a character is spawned.
+## to the server.
 
 
 @export var DEBUG: bool = false
@@ -13,8 +9,7 @@ extends MultiplayerSynchronizer
 ## The position is used by the [DemoMPCharacter] to move the character.
 @export var target_position: Vector2
 
-## We follow the main synchronizer, so we can match its visibility changes
-## for any peers
+## Follow the main synchronizer to match its visibility changes for any peers
 @export var sync: MultiplayerSynchronizer
 
 ## Only relevant for debugging to see when the [member target_position] changes
@@ -35,7 +30,9 @@ func _ready() -> void:
 
 func _on_sync_visibility_changed(peer_id: int) -> void:
 	var is_visible: bool = sync.get_visibility_for(peer_id)
-	if DEBUG: print("%s::_on_sync_visibility_changed(%s) (is_visible %s on peer: %s)" % [get_parent(), peer_id, is_visible, multiplayer.get_unique_id()])
+	if DEBUG: print("%s::_on_sync_visibility_changed(%s) (is_visible %s on peer: %s)" % [
+		get_parent(), peer_id, is_visible, multiplayer.get_unique_id()
+	])
 	set_visibility_for(peer_id, is_visible)
 
 

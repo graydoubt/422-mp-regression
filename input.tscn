@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bngq00qt12bov"]
-
-[ext_resource type="Script" path="res://input.gd" id="1_fw4es"]
-
-[node name="Input" type="MultiplayerSynchronizer"]
-script = ExtResource("1_fw4es")

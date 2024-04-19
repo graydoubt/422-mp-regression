@@ -31,4 +31,3 @@ layout_mode = 2
 text = "Join"
 
 [node name="TileMap" parent="." instance=ExtResource("2_h4of2")]
-trust_clients = false

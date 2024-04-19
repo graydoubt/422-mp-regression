@@ -1,24 +1,13 @@
-[gd_scene load_steps=14 format=3 uid="uid://bfhiunvq06gfr"]
+[gd_scene load_steps=12 format=3 uid="uid://bfhiunvq06gfr"]
 
 [ext_resource type="Texture2D" uid="uid://bogbo2fv2iq0m" path="res://icon.svg" id="1_hfgpa"]
 [ext_resource type="Script" path="res://character.gd" id="1_ipfiy"]
 [ext_resource type="PackedScene" uid="uid://skduupgsjol5" path="res://sync.tscn" id="2_t51iy"]
 [ext_resource type="PackedScene" uid="uid://baqdmodjcnlxl" path="res://motion.tscn" id="3_bi12j"]
-[ext_resource type="PackedScene" uid="uid://bngq00qt12bov" path="res://input.tscn" id="4_d4uut"]
 [ext_resource type="PackedScene" uid="uid://bc2fiwnsgya4s" path="res://client_scope.tscn" id="5_2dg3v"]
 [ext_resource type="PackedScene" uid="uid://dwm6e3gxpm5mt" path="res://scoped_object.tscn" id="7_op5oj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_llbqq"]
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lbmqc"]
-properties/0/path = NodePath(".:direction")
-properties/0/spawn = true
-properties/0/replication_mode = 2
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bityu"]
-properties/0/path = NodePath(".:target_position")
-properties/0/spawn = true
-properties/0/replication_mode = 2
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7wmav"]
 properties/0/path = NodePath(".:peer_id")
@@ -28,18 +17,22 @@ properties/1/path = NodePath(".:authority_id")
 properties/1/spawn = true
 properties/1/replication_mode = 2
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_bityu"]
+properties/0/path = NodePath(".:target_position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_e4oc5"]
 radius = 256.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vjsj5"]
 radius = 16.0
 
-[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("sync", "input", "motion", "scope", "label", "sprite")]
-collision_mask = 0
+[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("sync", "motion", "scope", "label", "sprite")]
+collision_layer = 0
 script = ExtResource("1_ipfiy")
 DEBUG = true
 sync = NodePath("Sync")
-input = NodePath("Input")
 motion = NodePath("Motion")
 scope = NodePath("NetworkClientScope2D")
 label = NodePath("Label")
@@ -52,18 +45,13 @@ shape = SubResource("CircleShape2D_llbqq")
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_hfgpa")
 
-[node name="Input" parent="." instance=ExtResource("4_d4uut")]
-root_path = NodePath(".")
-replication_config = SubResource("SceneReplicationConfig_lbmqc")
-public_visibility = false
+[node name="Sync" parent="." instance=ExtResource("2_t51iy")]
+replication_config = SubResource("SceneReplicationConfig_7wmav")
 
 [node name="Motion" parent="." node_paths=PackedStringArray("sync") instance=ExtResource("3_bi12j")]
 replication_config = SubResource("SceneReplicationConfig_bityu")
 DEBUG = true
 sync = NodePath("../Sync")
-
-[node name="Sync" parent="." instance=ExtResource("2_t51iy")]
-replication_config = SubResource("SceneReplicationConfig_7wmav")
 
 [node name="NetworkClientScope2D" parent="." instance=ExtResource("5_2dg3v")]
 collision_layer = 0

@@ -12,11 +12,7 @@ Each character has three `MultiplayerSynchronizer`s.
 
 The "Sync" `MultiplayerSynchronizer` is always server-authoritative so that the character's `peer_id` and `authority_id` properties can always be synced from server to client.
 
-The "Input" `MultiplayerSynchronizer` is always client-authoritative and only syncs its own `direction` property, so that input can be sent from clients to the server.
-
-The "Motion" `MultiplayerSynchronizer` sync direction follows the character's `authority_id`.
-(The TileMap's "`trust_clients`" property can be used to determine whether clients move their character, or only send input and the server moves the character)
-
+The "Motion" `MultiplayerSynchronizer` node syncs its own `target_position` property from client to server, which is used to move/lerp the character
 
 ## Bug reproduction
 
@@ -33,7 +29,7 @@ Use `WASD` to move the player characters.
 The first time characters enter each other's visibility range, it works as expected.
 
 Once they leave the range, and re-enter it, the server's (peer 1) character will be stuck at position 0,0.
-It seems the client can no longer match up the correct synchronizer.
+It seems the client can no longer receive data from the Motion synchronizer.
 The client will report error messages for each synchronization update:
 
 ```

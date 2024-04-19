@@ -11,6 +11,7 @@ var peer_id: int = -1:
 
 
 ## Scope logic only runs server-side
+## and waits for the owner scene to be ready before monitoring starts
 func _ready():
 	if not multiplayer.is_server():
 		return
@@ -27,7 +28,7 @@ func _connect_signals():
 
 ## Called when the [member peer_id] is set, which may be after
 ## [method _on_area_entered] already triggered.
-## So we're re-forcing it to run again with the [member peer_id] now set.
+## So forcing it to run again.
 func _apply_scope():
 	if not multiplayer.is_server():
 		return
